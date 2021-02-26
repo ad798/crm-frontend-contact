@@ -15,3 +15,16 @@
   top: 0;
   z-index: 1;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.list-item-margin {
+  margin: 1em;
+}
+
+.card {
+  max-width: 100%;
+  margin: 2em 2em;
+}
