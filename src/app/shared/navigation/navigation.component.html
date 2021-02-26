@@ -9,9 +9,17 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="products">Productos</a>
-      <a mat-list-item routerLink="campaigns">Campañas</a>
-      <a mat-list-item routerLink="possible-clients">Posibles Clientes</a>
+      <a matSubheader routerLink="products">Productos</a>
+      <a mat-list-item routerLink="products/list">Listar productos</a>
+      <a mat-list-item routerLink="products/add">Agregar nuevo</a>
+      <mat-divider></mat-divider>
+      <a matSubheader routerLink="campaigns">Campañas</a>
+      <a mat-list-item routerLink="">Listar campañas</a>
+      <a mat-list-item routerLink="">Agregar nueva</a>
+      <mat-divider></mat-divider>
+      <a matSubheader routerLink="possible-clients">Posibles Clientes</a>
+      <a mat-list-item routerLink="">Listar posibles clientes</a>
+      <a mat-list-item routerLink="">Agregar nuevos</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
