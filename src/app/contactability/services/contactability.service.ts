@@ -8,22 +8,44 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ContactabilityService {
-  private baseUrl =
-    'http://localhost:8082/api/contactability-registry/byStatus';
+  private baseUrl = 'http://localhost:8082/api/contactability-registry';
   constructor(private http: HttpClient) {}
 
   getByStatus(status: string): Observable<Contactability[]> {
-    return this.http.get<Contactability[]>(`${this.baseUrl}/${status}`).pipe(
-      catchError((error) => {
-        let errorMsg: string;
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return throwError(errorMsg);
-      })
-    );
+    return this.http
+      .get<Contactability[]>(`${this.baseUrl}/byStatus/${status}`)
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
+  }
+
+  getByNameAndSurname(
+    name: string | undefined,
+    surname: string | undefined
+  ): Observable<Contactability[]> {
+    return this.http
+      .get<Contactability[]>(
+        `${this.baseUrl}/byClientNameAndSurname/${name}-${surname}`
+      )
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
