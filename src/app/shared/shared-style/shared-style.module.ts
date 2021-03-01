@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    FormsModule,
   ],
   exports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    FormsModule,
   ],
 })
 export class SharedStyleModule {}
