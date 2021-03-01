@@ -24,7 +24,7 @@ export class SearchBySingleStatusComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Contactability>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  status = 'ASS';
+  selectedStatus = 'ASS';
   clicked = false;
 
   constructor(private contactabilityService: ContactabilityService) {
@@ -41,7 +41,7 @@ export class SearchBySingleStatusComponent implements AfterViewInit {
   }
 
   searchProductByStatus() {
-    this.contactabilityService.getByStatus(this.status).subscribe((data) => {
+    this.contactabilityService.getByStatus(this.selectedStatus).subscribe((data) => {
       this.dataSource.data = data;
     });
   }
