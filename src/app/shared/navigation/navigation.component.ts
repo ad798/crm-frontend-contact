@@ -26,10 +26,6 @@ export class NavigationComponent {
           value: 'contactability/search-by-single-status',
         },
         {
-          description: 'Buscar por varios estados',
-          value: 'contactability/search-by-various-status',
-        },
-        {
           description: 'Buscar por nombre y apellido',
           value: 'contactability/search-by-name-surname',
         },
