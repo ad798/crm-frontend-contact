@@ -23,15 +23,15 @@ export class NavigationComponent {
         },
         {
           description: 'Buscar por estado',
-          value: 'contactability/find-by-single-status',
+          value: 'contactability/search-by-single-status',
         },
         {
           description: 'Buscar por varios estados',
-          value: 'contactability/find-by-various-status',
+          value: 'contactability/search-by-various-status',
         },
         {
           description: 'Buscar por nombre y apellido',
-          value: 'contactability/find-by-name-surname',
+          value: 'contactability/search-by-name-surname',
         },
       ],
     },
