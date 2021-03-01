@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ContactabilityService } from '../../services/contactability.service';
 
@@ -7,31 +11,42 @@ import { ContactabilityService } from '../../services/contactability.service';
   templateUrl: './search-by-single-status.component.html',
   styleUrls: ['./search-by-single-status.component.css'],
 })
-export class SearchBySingleStatusComponent implements OnInit {
-  contactability?: Contactability[];
+export class SearchBySingleStatusComponent implements AfterViewInit {
   displayedColumns = [
-    'campaign',
-    'identification',
-    'names',
-    'surnames',
-    'phone',
+    'campaign.name',
+    'clientIdentification',
+    'clientName',
+    'clientSurname',
+    'clientPhone',
     'status',
   ];
+  contactability?: Contactability[];
+  dataSource: MatTableDataSource<Contactability>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   status = 'ASS';
   clicked = false;
 
-  constructor(private contactabilityService: ContactabilityService) {}
+  constructor(private contactabilityService: ContactabilityService) {
+    this.dataSource = new MatTableDataSource<Contactability>([]);
+  }
 
-  ngOnInit(): void {}
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   searchProductByStatus() {
     this.contactabilityService.getByStatus(this.status).subscribe((data) => {
-      this.contactability = data;
-      console.log(data);
+      this.dataSource.data = data;
     });
   }
 
-  setNewSearch(){
-    this.contactability = undefined;
+  setNewSearch() {
+    this.dataSource.data = [];
   }
 }
