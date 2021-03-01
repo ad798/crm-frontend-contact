@@ -9,6 +9,34 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent {
+  links = [
+    {
+      subHeader: 'Contactabilidad',
+      paths: [
+        {
+          description: 'contactability/add',
+          value: 'contactability/add',
+        },
+        {
+          description: 'contactability/update-status',
+          value: 'contactability/update-status',
+        },
+        {
+          description: 'Buscar por estado',
+          value: 'contactability/find-by-single-status',
+        },
+        {
+          description: 'Buscar por varios estados',
+          value: 'contactability/find-by-various-status',
+        },
+        {
+          description: 'Buscar por nombre y apellido',
+          value: 'contactability/find-by-name-surname',
+        },
+      ],
+    },
+  ];
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
