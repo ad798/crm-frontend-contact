@@ -47,19 +47,34 @@ export class ContactabilityService {
           return throwError(errorMsg);
         })
       );
+    }
 
   getByIdentification(identification: string): Observable<Contactability[]>  {
-      return this.http.get<Contactability[]>(`${this.baseUrl}/byClientIdentification/${identification}`).pipe(
-        catchError((error) => {
-          let errorMsg: string;
-          if (error.error instanceof ErrorEvent) {
-            errorMsg = `Error: ${error.error.message}`;
-          } else {
-            errorMsg = this.getServerErrorMessage(error);
-          }
-          return throwError(errorMsg);
-        })
-      );
+    return this.http.get<Contactability[]>(`${this.baseUrl}/byClientIdentification/${identification}`).pipe(
+      catchError((error) => {
+        let errorMsg: string;
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = this.getServerErrorMessage(error);
+        }
+        return throwError(errorMsg);
+      })
+    );
+  }
+
+  getByCampaignIdClientId(campaignId: number, clientId: string){
+    return this.http.get<Contactability>(`${this.baseUrl}/byClientIdentificationCampaign/${campaignId}/${clientId}`).pipe(
+      catchError((error) => {
+        let errorMsg: string;
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = this.getServerErrorMessage(error);
+        }
+        return throwError(errorMsg);
+      })
+    )
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {

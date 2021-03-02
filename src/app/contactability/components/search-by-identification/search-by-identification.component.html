@@ -1,7 +1,7 @@
 <mat-card-content>
   <div>
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-      <mat-label>Enter some input</mat-label>
+      <mat-label>Ingrese la cedula</mat-label>
       <input matInput matInput [(ngModel)]="identification" #input maxlength="10" placeholder="Ej. 1700000000">
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
     </mat-form-field>
