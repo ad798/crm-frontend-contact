@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ContactabilityService {
+
   private baseUrl = 'http://localhost:8082/api/contactability-registry';
   constructor(private http: HttpClient) {}
 
@@ -36,6 +37,19 @@ export class ContactabilityService {
         `${this.baseUrl}/byClientNameAndSurname/${name}-${surname}`
       )
       .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
+
+  getByIdentification(identification: string): Observable<Contactability[]>  {
+      return this.http.get<Contactability[]>(`${this.baseUrl}/byClientIdentification/${identification}`).pipe(
         catchError((error) => {
           let errorMsg: string;
           if (error.error instanceof ErrorEvent) {
