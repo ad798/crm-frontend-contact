@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -24,7 +26,9 @@ import {MatTableModule} from '@angular/material/table';
     MatListModule,
     MatCardModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    FormsModule
   ],
   exports: [
     CommonModule,
@@ -36,7 +40,9 @@ import {MatTableModule} from '@angular/material/table';
     MatListModule,
     MatCardModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    FormsModule
   ]
 })
 export class SharedStyleModule {}

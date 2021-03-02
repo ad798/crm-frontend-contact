@@ -33,6 +33,10 @@ export class NavigationComponent {
           description: 'Buscar por nombre y apellido',
           value: 'contactability/search-by-name-surname',
         },
+        {
+          description: 'Buscar por identificacion',
+          value: 'contactability/search-by-identification',
+        },
       ],
     },
   ];

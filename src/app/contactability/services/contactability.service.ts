@@ -9,11 +9,25 @@ import { catchError } from 'rxjs/operators';
 })
 export class ContactabilityService {
   private baseUrl =
-    'http://localhost:8082/api/contactability-registry/byStatus';
+    'http://localhost:8082/api/contactability-registry';
   constructor(private http: HttpClient) {}
 
   getByStatus(status: string): Observable<Contactability[]> {
-    return this.http.get<Contactability[]>(`${this.baseUrl}/${status}`).pipe(
+    return this.http.get<Contactability[]>(`${this.baseUrl}/byStatus/${status}`).pipe(
+      catchError((error) => {
+        let errorMsg: string;
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = this.getServerErrorMessage(error);
+        }
+        return throwError(errorMsg);
+      })
+    );
+  }
+
+  getByIdentification(identification: string): Observable<Contactability[]>  {
+    return this.http.get<Contactability[]>(`${this.baseUrl}/byClientIdentification/${identification}`).pipe(
       catchError((error) => {
         let errorMsg: string;
         if (error.error instanceof ErrorEvent) {
