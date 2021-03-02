@@ -37,6 +37,10 @@ export class NavigationComponent {
           description: 'Buscar por identificacion y campaña',
           value: 'contactability/search-by-campaign-id-client-id',
         },
+        {
+          description: 'Buscar por numero de teléfono',
+          value: 'contactability/search-by-phone',
+        },
       ],
     },
   ];
