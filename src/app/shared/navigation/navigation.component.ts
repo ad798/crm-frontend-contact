@@ -41,6 +41,10 @@ export class NavigationComponent {
           description: 'Buscar por numero de teléfono',
           value: 'contactability/search-by-phone',
         },
+        {
+          description: 'Buscar por email',
+          value: 'contactability/search-by-email',
+        },
       ],
     },
   ];
