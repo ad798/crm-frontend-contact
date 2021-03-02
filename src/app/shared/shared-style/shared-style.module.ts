@@ -10,10 +10,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -28,9 +30,11 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     HttpClientModule,
     MatTableModule,
+    MatPaginatorModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
     FormsModule,
-    MatInputModule
   ],
   exports: [
     CommonModule,
@@ -43,9 +47,11 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     HttpClientModule,
     MatTableModule,
+    MatPaginatorModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
     FormsModule,
-    MatInputModule
-  ]
+  ],
 })
 export class SharedStyleModule {}
