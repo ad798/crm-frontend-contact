@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MatTableModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ],
   exports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MatTableModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ]
 })
 export class SharedStyleModule {}
