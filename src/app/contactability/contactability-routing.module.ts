@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListByCampaignComponent } from './components/list-by-campaign/list-by-campaign.component';
 import { SearchByCampaignIdClientIdComponent } from './components/search-by-campaign-id-client-id/search-by-campaign-id-client-id.component';
 import { SearchByEmailComponent } from './components/search-by-email/search-by-email.component';
 import { SearchByIdentificationComponent } from './components/search-by-identification/search-by-identification.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'search-by-campaign-id-client-id', component: SearchByCampaignIdClientIdComponent },
   { path: 'search-by-phone', component: SearchByPhoneComponent },
   { path: 'search-by-email', component: SearchByEmailComponent },
+  { path: 'search-by-campaign', component: ListByCampaignComponent },
 ];
 
 @NgModule({

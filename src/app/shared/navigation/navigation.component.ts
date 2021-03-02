@@ -45,6 +45,10 @@ export class NavigationComponent {
           description: 'Buscar por email',
           value: 'contactability/search-by-email',
         },
+        {
+          description: 'Buscar por campaña',
+          value: 'contactability/search-by-campaign',
+        },
       ],
     },
   ];
