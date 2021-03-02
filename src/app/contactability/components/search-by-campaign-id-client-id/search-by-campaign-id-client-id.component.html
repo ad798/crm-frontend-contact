@@ -1,0 +1,68 @@
+<mat-card-content>
+  <div>
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+      <mat-label>Ingrese la cedula del cliente</mat-label>
+      <input matInput matInput [(ngModel)]="clientId" #input maxlength="10" placeholder="Ej. 1700000000">
+      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-label>Estados</mat-label>
+      <mat-select [(value)]="campaignId" required>
+        <mat-option *ngFor="let campaign of campaignsList" [value]="campaign.id">
+          {{campaign.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-card *ngIf="contactability else notFound">
+    <b>Campaña: </b>{{ contactability.campaign.name }}
+    <br>
+    <b>Cedula: </b>{{ contactability.clientIdentification }}
+    <br>
+    <b>Nombre: </b>{{ contactability.clientName + " " + contactability.clientSurname }}
+    <br>
+    <b>Teléfono: </b>{{ contactability.clientName }}
+    <br>
+    <b>Estado: </b><span [ngSwitch]="contactability.status">
+      <button mat-stroked-button class="assigned" *ngSwitchCase="'ASS'">
+        Asignado
+      </button>
+      <button mat-stroked-button class="accepted" *ngSwitchCase="'INP'">
+        En progreso
+      </button>
+      <button mat-stroked-button class="accepted" *ngSwitchCase="'ACC'">
+        Aceptado
+      </button>
+      <button mat-stroked-button class="rejected" *ngSwitchCase="'REJ'">
+        Rechazado
+      </button>
+    </span>
+  </mat-card>
+  <ng-template #notFound>
+    <div>No hay registros para mostrar...</div>
+   </ng-template>
+</mat-card-content>
+
+<br />
+<mat-divider></mat-divider>
+<br />
+<mat-card-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="searchContactabilityByCampaignIdClientId(); clicked = true"
+    [disabled]="clicked"
+  >
+    Buscar
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    (click)="setNewSearch(); clicked = false"
+    [disabled]="!clicked"
+  >
+    Limpiar
+  </button>
+</mat-card-actions>
