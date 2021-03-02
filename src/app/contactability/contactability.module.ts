@@ -8,6 +8,7 @@ import { SearchBySingleStatusComponent } from './components/search-by-single-sta
 import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
 import { SearchByIdentificationComponent } from './components/search-by-identification/search-by-identification.component';
 import { SearchByCampaignIdClientIdComponent } from './components/search-by-campaign-id-client-id/search-by-campaign-id-client-id.component';
+import { SearchByPhoneComponent } from './components/search-by-phone/search-by-phone.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SearchByCampaignIdClientIdComponent } from './components/search-by-camp
     SearchBySingleStatusComponent,
     SearchByNameSurnameComponent,
     SearchByIdentificationComponent,
-    SearchByCampaignIdClientIdComponent
+    SearchByCampaignIdClientIdComponent,
+    SearchByPhoneComponent
   ],
   imports: [CommonModule, ContactabilityRoutingModule, SharedStyleModule],
 })

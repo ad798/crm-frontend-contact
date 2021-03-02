@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchByCampaignIdClientIdComponent } from './components/search-by-campaign-id-client-id/search-by-campaign-id-client-id.component';
 import { SearchByIdentificationComponent } from './components/search-by-identification/search-by-identification.component';
 import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
+import { SearchByPhoneComponent } from './components/search-by-phone/search-by-phone.component';
 import { SearchBySingleStatusComponent } from './components/search-by-single-status/search-by-single-status.component';
 import { ContactabilityComponent } from './contactability.component';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'search-by-name-surname', component: SearchByNameSurnameComponent },
   { path: 'search-by-identification', component: SearchByIdentificationComponent },
   { path: 'search-by-campaign-id-client-id', component: SearchByCampaignIdClientIdComponent },
+  { path: 'search-by-phone', component: SearchByPhoneComponent },
 ];
 
 @NgModule({
