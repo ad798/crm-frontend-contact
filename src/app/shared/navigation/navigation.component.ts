@@ -14,22 +14,6 @@ export class NavigationComponent {
       subHeader: 'Contactabilidad',
       paths: [
         {
-          description: 'contactability/add',
-          value: 'contactability/add',
-        },
-        {
-          description: 'contactability/update-status',
-          value: 'contactability/update-status',
-        },
-        {
-          description: 'Buscar por estado',
-          value: 'contactability/search-by-single-status',
-        },
-        {
-          description: 'Buscar por nombre y apellido',
-          value: 'contactability/search-by-name-surname',
-        },
-        {
           description: 'Buscar por identificacion',
           value: 'contactability/search-by-identification',
         },
