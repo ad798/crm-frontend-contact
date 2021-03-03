@@ -19,7 +19,6 @@ export class CampaignService {
       .pipe(
         catchError((error) => {
           let errorMsg: string;
-          console.log(error)
           if (error.error instanceof ErrorEvent) {
             errorMsg = `Error: ${error.error.message}`;
           } else {

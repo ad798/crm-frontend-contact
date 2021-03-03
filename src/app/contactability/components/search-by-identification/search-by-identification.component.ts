@@ -30,7 +30,6 @@ export class SearchByIdentificationComponent implements OnInit {
   searchProductByIdentification(identification: string) {
     this.contactabilityService.getByIdentification(identification).subscribe((data) => {
       this.contactability = data;
-      console.log(data);
     });
   }
 

@@ -8,7 +8,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ContactabilityService {
-
   private baseUrl = 'http://localhost:8082/api/contactability-registry';
   constructor(private http: HttpClient) {}
 
@@ -47,76 +46,90 @@ export class ContactabilityService {
           return throwError(errorMsg);
         })
       );
-    }
-
-  getByIdentification(identification: string): Observable<Contactability[]>  {
-    return this.http.get<Contactability[]>(`${this.baseUrl}/byClientIdentification/${identification}`).pipe(
-      catchError((error) => {
-        let errorMsg: string;
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return throwError(errorMsg);
-      })
-    );
   }
 
-  getByPhone(phone: string): Observable<Contactability[]>  {
-    return this.http.get<Contactability[]>(`${this.baseUrl}/byClientPhone/${phone}`).pipe(
-      catchError((error) => {
-        let errorMsg: string;
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return throwError(errorMsg);
-      })
-    );
+  getByIdentification(identification: string): Observable<Contactability[]> {
+    return this.http
+      .get<Contactability[]>(
+        `${this.baseUrl}/byClientIdentification/${identification}`
+      )
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
   }
 
-  getByEmail(email: string): Observable<Contactability[]>  {
-    return this.http.get<Contactability[]>(`${this.baseUrl}/byEmail/${email}`).pipe(
-      catchError((error) => {
-        let errorMsg: string;
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return throwError(errorMsg);
-      })
-    );
+  getByPhone(phone: string): Observable<Contactability[]> {
+    return this.http
+      .get<Contactability[]>(`${this.baseUrl}/byClientPhone/${phone}`)
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
   }
 
-  getByCampaign(campaignId: number): Observable<Contactability[]>  {
-    return this.http.get<Contactability[]>(`${this.baseUrl}/byCampaign/${campaignId}`).pipe(
-      catchError((error) => {
-        let errorMsg: string;
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return throwError(errorMsg);
-      })
-    );
+  getByEmail(email: string): Observable<Contactability[]> {
+    return this.http
+      .get<Contactability[]>(`${this.baseUrl}/byEmail/${email}`)
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
   }
 
-  getByCampaignIdClientId(campaignId: number, clientId: string){
-    return this.http.get<Contactability>(`${this.baseUrl}/byClientIdentificationCampaign/${campaignId}/${clientId}`).pipe(
-      catchError((error) => {
-        let errorMsg: string;
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = this.getServerErrorMessage(error);
-        }
-        return throwError(errorMsg);
-      })
-    )
+  getByCampaign(campaignId: number): Observable<Contactability[]> {
+    return this.http
+      .get<Contactability[]>(`${this.baseUrl}/byCampaign/${campaignId}`)
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
+  }
+
+  getByCampaignIdClientId(campaignId: number, clientId: string) {
+    return this.http
+      .get<Contactability>(
+        `${this.baseUrl}/byClientIdentificationCampaign/${campaignId}/${clientId}`
+      )
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {

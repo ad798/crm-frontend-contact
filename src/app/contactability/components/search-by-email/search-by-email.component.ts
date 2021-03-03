@@ -30,7 +30,6 @@ export class SearchByEmailComponent implements OnInit {
   searchCantactabilityByEmail() {
     this.contactabilityService.getByEmail(this.email).subscribe((data) => {
       this.contactability = data;
-      console.log(data);
     });
   }
 

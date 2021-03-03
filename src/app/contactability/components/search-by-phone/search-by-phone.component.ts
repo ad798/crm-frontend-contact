@@ -30,7 +30,6 @@ export class SearchByPhoneComponent implements OnInit {
   searchCantactabilityByPhone() {
     this.contactabilityService.getByPhone(this.phone).subscribe((data) => {
       this.contactability = data;
-      console.log(data);
     });
   }
 

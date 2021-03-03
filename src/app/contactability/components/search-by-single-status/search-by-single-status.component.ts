@@ -1,9 +1,8 @@
-import { AfterViewInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
+import { catchError } from 'rxjs/operators';
 import { ContactabilityService } from '../../services/contactability.service';
 
 @Component({
@@ -11,42 +10,22 @@ import { ContactabilityService } from '../../services/contactability.service';
   templateUrl: './search-by-single-status.component.html',
   styleUrls: ['./search-by-single-status.component.css'],
 })
-export class SearchBySingleStatusComponent implements AfterViewInit {
-  displayedColumns = [
-    'campaign.name',
-    'clientIdentification',
-    'clientName',
-    'clientSurname',
-    'clientPhone',
-    'status',
-  ];
-  contactability?: Contactability[];
-  dataSource: MatTableDataSource<Contactability>;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+export class SearchBySingleStatusComponent implements OnInit {
   selectedStatus = 'ASS';
-  clicked = false;
 
-  constructor(private contactabilityService: ContactabilityService) {
-    this.dataSource = new MatTableDataSource<Contactability>([]);
-  }
+  constructor(private contactabilityService: ContactabilityService) {}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  ngOnInit() {}
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  searchProductByStatus() {
-    this.contactabilityService.getByStatus(this.selectedStatus).subscribe((data) => {
-      this.dataSource.data = data;
-    });
-  }
-
-  setNewSearch() {
-    this.dataSource.data = [];
+  searchProductByStatus(dataSource: MatTableDataSource<Contactability>): void {    
+    this.contactabilityService.getByStatus(this.selectedStatus).subscribe(
+      (data) => {
+        dataSource.data = data;
+      },
+      (error) => {
+        dataSource.data = [];
+      }
+    );
+    
   }
 }
