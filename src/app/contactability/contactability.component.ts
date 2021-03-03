@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
+import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
 import { SearchBySingleStatusComponent } from './components/search-by-single-status/search-by-single-status.component';
 import { ContactabilityService } from './services/contactability.service';
 
@@ -39,6 +40,8 @@ export class ContactabilityComponent implements AfterViewInit {
 
   @ViewChild(SearchBySingleStatusComponent)
   searchByStatusComponent!: SearchBySingleStatusComponent;
+  @ViewChild(SearchByNameSurnameComponent)
+  searchByNameSurnameComponent!: SearchByNameSurnameComponent;
 
   constructor(private contactabilityService: ContactabilityService) {
     this.dataSource = new MatTableDataSource<Contactability>([]);
@@ -61,6 +64,11 @@ export class ContactabilityComponent implements AfterViewInit {
     switch (this.selectedSearchMethod) {
       case '1':
         this.searchByStatusComponent.searchProductByStatus(this.dataSource);
+        break;
+      case '2':
+        this.searchByNameSurnameComponent.searchProductByNameAndSurname(
+          this.dataSource
+        );
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;
