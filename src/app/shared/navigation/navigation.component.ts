@@ -14,12 +14,8 @@ export class NavigationComponent {
       subHeader: 'Contactabilidad',
       paths: [
         {
-          description: 'Buscar por identificacion',
-          value: 'contactability/search-by-identification',
-        },
-        {
-          description: 'Buscar por identificacion y campaña',
-          value: 'contactability/search-by-campaign-id-client-id',
+          description: 'Listar Registros de contactabilidad',
+          value: 'contactability',
         },
       ],
     },

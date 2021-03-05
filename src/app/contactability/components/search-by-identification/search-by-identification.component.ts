@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ContactabilityService } from '../../services/contactability.service';
 
@@ -9,32 +9,17 @@ import { ContactabilityService } from '../../services/contactability.service';
   styleUrls: ['./search-by-identification.component.css']
 })
 export class SearchByIdentificationComponent implements OnInit {
-  contactability?: Contactability[];
-  displayedColumns = [
-    'campaign',
-    'identification',
-    'names',
-    'surnames',
-    'phone',
-    'status',
-  ];
   public identification: string = '';
-  floatLabelControl = new FormControl('auto');
-  clicked = false;
 
   constructor(private contactabilityService: ContactabilityService) {}
 
   ngOnInit(): void {
   }
 
-  searchProductByIdentification(identification: string) {
-    this.contactabilityService.getByIdentification(identification).subscribe((data) => {
-      this.contactability = data;
+  searchContactabilityByIdentification(dataSource: MatTableDataSource<Contactability>) {
+    this.contactabilityService.getByIdentification(this.identification).subscribe((data) => {
+      dataSource.data = data;
     });
-  }
-
-  setNewSearch(){
-    this.contactability = undefined;
   }
 
 }
