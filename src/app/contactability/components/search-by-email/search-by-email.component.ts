@@ -17,7 +17,7 @@ export class SearchByEmailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchCantactabilityByEmail(dataSource: MatTableDataSource<Contactability>) {
+  searchContactabilityByEmail(dataSource: MatTableDataSource<Contactability>) {
     this.contactabilityService.getByEmail(this.email).subscribe((data) => {
       dataSource.data = data;
     });

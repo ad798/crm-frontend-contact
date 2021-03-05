@@ -6,6 +6,7 @@ import { Contactability } from 'models/contactability.model';
 import { ListByCampaignComponent } from './components/list-by-campaign/list-by-campaign.component';
 import { SearchByEmailComponent } from './components/search-by-email/search-by-email.component';
 import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
+import { SearchByPhoneComponent } from './components/search-by-phone/search-by-phone.component';
 import { SearchBySingleStatusComponent } from './components/search-by-single-status/search-by-single-status.component';
 import { ContactabilityService } from './services/contactability.service';
 
@@ -44,6 +45,10 @@ export class ContactabilityComponent implements AfterViewInit {
       name: 'Buscar por email',
       value: '4',
     },
+    {
+      name: 'Buscar por número de teléfono',
+      value: '5',
+    },
   ];
   selectedSearchMethod: string;
   isSearchPerformed: boolean;
@@ -56,6 +61,8 @@ export class ContactabilityComponent implements AfterViewInit {
   listByCampaignComponent!: ListByCampaignComponent;
   @ViewChild(SearchByEmailComponent)
   searchByEmailComponent!: SearchByEmailComponent;
+  @ViewChild(SearchByPhoneComponent)
+  searchByPhoneComponent!: SearchByPhoneComponent;
 
   constructor(private contactabilityService: ContactabilityService) {
     this.dataSource = new MatTableDataSource<Contactability>([]);
@@ -88,7 +95,10 @@ export class ContactabilityComponent implements AfterViewInit {
         this.listByCampaignComponent.searchContactabilityByCampaign(this.dataSource);
         break;
       case '4':
-        this.searchByEmailComponent.searchCantactabilityByEmail(this.dataSource);
+        this.searchByEmailComponent.searchContactabilityByEmail(this.dataSource);
+        break;
+      case '5':
+        this.searchByPhoneComponent.searchContactabilityByPhone(this.dataSource);
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;

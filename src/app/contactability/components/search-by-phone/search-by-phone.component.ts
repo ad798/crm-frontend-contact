@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ContactabilityService } from '../../services/contactability.service';
 
@@ -9,32 +9,17 @@ import { ContactabilityService } from '../../services/contactability.service';
   styleUrls: ['./search-by-phone.component.css']
 })
 export class SearchByPhoneComponent implements OnInit {
-  contactability?: Contactability[];
-  displayedColumns = [
-    'campaign',
-    'identification',
-    'names',
-    'surnames',
-    'phone',
-    'status',
-  ];
   public phone: string = '';
-  floatLabelControl = new FormControl('auto');
-  clicked = false;
 
   constructor(private contactabilityService: ContactabilityService) {}
 
   ngOnInit(): void {
   }
 
-  searchCantactabilityByPhone() {
+  searchContactabilityByPhone(dataSource: MatTableDataSource<Contactability>) {
     this.contactabilityService.getByPhone(this.phone).subscribe((data) => {
-      this.contactability = data;
+      dataSource.data = data;
     });
-  }
-
-  setNewSearch(){
-    this.contactability = undefined;
   }
 
 }
