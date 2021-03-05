@@ -62,6 +62,7 @@ export class ContactabilityComponent implements AfterViewInit {
   ];
   selectedSearchMethod: string;
   isSearchPerformed: boolean;
+  currentSearch: Function;
 
   @ViewChild(SearchBySingleStatusComponent)
   searchByStatusComponent!: SearchBySingleStatusComponent;
@@ -82,6 +83,7 @@ export class ContactabilityComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource<Contactability>([]);
     this.selectedSearchMethod = '';
     this.isSearchPerformed = false;
+    this.currentSearch = () => {};
   }
 
   ngOnInit(): void {}
@@ -99,29 +101,45 @@ export class ContactabilityComponent implements AfterViewInit {
     switch (this.selectedSearchMethod) {
       case '1':
         this.searchByStatusComponent.searchProductByStatus(this.dataSource);
+        this.currentSearch = this.searchByStatusComponent.searchProductByStatus;
         break;
       case '2':
         this.searchByNameSurnameComponent.searchProductByNameAndSurname(
           this.dataSource
         );
+        this.currentSearch = this.searchByNameSurnameComponent.searchProductByNameAndSurname;
         break;
       case '3':
         this.listByCampaignComponent.searchContactabilityByCampaign(this.dataSource);
+        this.currentSearch = this.listByCampaignComponent.searchContactabilityByCampaign;
         break;
       case '4':
         this.searchByEmailComponent.searchContactabilityByEmail(this.dataSource);
+        this.currentSearch = this.searchByEmailComponent.searchContactabilityByEmail;
         break;
       case '5':
         this.searchByPhoneComponent.searchContactabilityByPhone(this.dataSource);
+        this.currentSearch = this.searchByPhoneComponent.searchContactabilityByPhone;
         break;
       case '6':
         this.searchByIdentificationComponent.searchContactabilityByIdentification(this.dataSource);
+        this.currentSearch = this.searchByIdentificationComponent.searchContactabilityByIdentification;
         break;
       case '7':
         this.searchByCampaignIdClientIdComponent.searchContactabilityByCampaignIdClientId(this.dataSource);
+        this.currentSearch = this.searchByCampaignIdClientIdComponent.searchContactabilityByCampaignIdClientId;
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;
+  }
+
+  updateStatus(id: number, status: string){
+    this.contactabilityService.updateStatus(id, status).subscribe((data) => {
+      console.log("update successful");
+    },
+    (error) => {
+      console.log("error while uodating product");
+    });
   }
 
   setNewSearch() {
