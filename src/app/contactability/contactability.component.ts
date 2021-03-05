@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
+import { ListByCampaignComponent } from './components/list-by-campaign/list-by-campaign.component';
 import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
 import { SearchBySingleStatusComponent } from './components/search-by-single-status/search-by-single-status.component';
 import { ContactabilityService } from './services/contactability.service';
@@ -34,6 +35,10 @@ export class ContactabilityComponent implements AfterViewInit {
       name: 'Buscar por nombre y apellido',
       value: '2',
     },
+    {
+      name: 'Buscar por campaña',
+      value: '3',
+    },
   ];
   selectedSearchMethod: string;
   isSearchPerformed: boolean;
@@ -42,6 +47,8 @@ export class ContactabilityComponent implements AfterViewInit {
   searchByStatusComponent!: SearchBySingleStatusComponent;
   @ViewChild(SearchByNameSurnameComponent)
   searchByNameSurnameComponent!: SearchByNameSurnameComponent;
+  @ViewChild(ListByCampaignComponent)
+  listByCampaignComponent!: ListByCampaignComponent;
 
   constructor(private contactabilityService: ContactabilityService) {
     this.dataSource = new MatTableDataSource<Contactability>([]);
@@ -69,6 +76,9 @@ export class ContactabilityComponent implements AfterViewInit {
         this.searchByNameSurnameComponent.searchProductByNameAndSurname(
           this.dataSource
         );
+        break;
+      case '3':
+        this.listByCampaignComponent.searchContactabilityByCampaign(this.dataSource);
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;
