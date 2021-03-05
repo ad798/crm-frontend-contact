@@ -13,10 +13,7 @@ export class NavigationComponent {
     {
       subHeader: 'Contactabilidad',
       paths: [
-        {
-          description: 'Buscar por identificacion y campaña',
-          value: 'contactability/search-by-campaign-id-client-id',
-        },
+
       ],
     },
   ];
