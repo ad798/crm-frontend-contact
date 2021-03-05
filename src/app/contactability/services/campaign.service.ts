@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class CampaignService {
 
-  private baseUrl = 'http://localhost:8082/api/campaigns';
+  private baseUrl = 'http://20.84.105.80:8082/api/campaigns';
   constructor(private http: HttpClient) {}
 
   getCampaigns(): Observable<Campaign[]> {
