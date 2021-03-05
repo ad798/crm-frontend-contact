@@ -114,7 +114,7 @@ export class ContactabilityService {
       );
   }
 
-  getByCampaignIdClientId(campaignId: number, clientId: string) {
+  getByCampaignIdClientId(campaignId: number, clientId: string): Observable<Contactability> {
     return this.http
       .get<Contactability>(
         `${this.baseUrl}/byClientIdentificationCampaign/${campaignId}/${clientId}`
