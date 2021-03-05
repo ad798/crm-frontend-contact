@@ -83,21 +83,12 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
       <td mat-cell *matCellDef="let element">
-        <span [ngSwitch]="element.status">
-          <!-- the same view can be shown in more than one case -->
-          <button mat-stroked-button class="assigned" *ngSwitchCase="'ASS'">
-            Asignado
-          </button>
-          <button mat-stroked-button class="accepted" *ngSwitchCase="'INP'">
-            En progreso
-          </button>
-          <button mat-stroked-button class="accepted" *ngSwitchCase="'ACC'">
-            Aceptado
-          </button>
-          <button mat-stroked-button class="rejected" *ngSwitchCase="'REJ'">
-            Rechazado
-          </button>
-        </span>
+        <mat-select [(value)]="element.status" (selectionChange)="updateStatus(element.id, $event.value)">
+          <mat-option value="ASS" class="assigned">Asignado</mat-option>
+          <mat-option value="INP" class="accepted">En progreso</mat-option>
+          <mat-option value="ACC" class="accepted">Aceptado</mat-option>
+          <mat-option value="REJ" class="rejected">Rechazado</mat-option>
+        </mat-select>
       </td>
     </ng-container>
 

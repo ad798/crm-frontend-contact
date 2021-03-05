@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Contactability } from 'models/contactability.model';
 import { catchError } from 'rxjs/operators';
@@ -118,6 +118,26 @@ export class ContactabilityService {
     return this.http
       .get<Contactability>(
         `${this.baseUrl}/byClientIdentificationCampaign/${campaignId}/${clientId}`
+      )
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+          return throwError(errorMsg);
+        })
+      );
+  }
+
+  updateStatus(id: number, status: string) {
+    const params = new HttpParams()
+                            .set('status', status);
+    return this.http
+      .put(
+        `${this.baseUrl}/updateContact/${id}`, params
       )
       .pipe(
         catchError((error) => {
