@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ContactabilityService {
-  private baseUrl = 'http://localhost:8082/api/contactability-registry';
+  private baseUrl = 'http://20.84.105.80:8082/api/contactability-registry';
   constructor(private http: HttpClient) {}
 
   getByStatus(status: string): Observable<Contactability[]> {
