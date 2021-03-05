@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ListByCampaignComponent } from './components/list-by-campaign/list-by-campaign.component';
+import { SearchByCampaignIdClientIdComponent } from './components/search-by-campaign-id-client-id/search-by-campaign-id-client-id.component';
 import { SearchByEmailComponent } from './components/search-by-email/search-by-email.component';
 import { SearchByIdentificationComponent } from './components/search-by-identification/search-by-identification.component';
 import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
@@ -54,6 +55,10 @@ export class ContactabilityComponent implements AfterViewInit {
       name: 'Buscar por cedula',
       value: '6',
     },
+    {
+      name: 'Buscar por cedula y campaña',
+      value: '7',
+    },
   ];
   selectedSearchMethod: string;
   isSearchPerformed: boolean;
@@ -70,6 +75,8 @@ export class ContactabilityComponent implements AfterViewInit {
   searchByPhoneComponent!: SearchByPhoneComponent;
   @ViewChild(SearchByIdentificationComponent)
   searchByIdentificationComponent!: SearchByIdentificationComponent;
+  @ViewChild(SearchByCampaignIdClientIdComponent)
+  searchByCampaignIdClientIdComponent!: SearchByCampaignIdClientIdComponent;
 
   constructor(private contactabilityService: ContactabilityService) {
     this.dataSource = new MatTableDataSource<Contactability>([]);
@@ -109,6 +116,9 @@ export class ContactabilityComponent implements AfterViewInit {
         break;
       case '6':
         this.searchByIdentificationComponent.searchContactabilityByIdentification(this.dataSource);
+        break;
+      case '7':
+        this.searchByCampaignIdClientIdComponent.searchContactabilityByCampaignIdClientId(this.dataSource);
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;
