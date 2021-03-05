@@ -13,7 +13,10 @@ export class NavigationComponent {
     {
       subHeader: 'Contactabilidad',
       paths: [
-
+        {
+          description: 'Listar Registros de contactabilidad',
+          value: 'contactability',
+        },
       ],
     },
   ];
