@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ListByCampaignComponent } from './components/list-by-campaign/list-by-campaign.component';
 import { SearchByEmailComponent } from './components/search-by-email/search-by-email.component';
+import { SearchByIdentificationComponent } from './components/search-by-identification/search-by-identification.component';
 import { SearchByNameSurnameComponent } from './components/search-by-name-surname/search-by-name-surname.component';
 import { SearchByPhoneComponent } from './components/search-by-phone/search-by-phone.component';
 import { SearchBySingleStatusComponent } from './components/search-by-single-status/search-by-single-status.component';
@@ -49,6 +50,10 @@ export class ContactabilityComponent implements AfterViewInit {
       name: 'Buscar por número de teléfono',
       value: '5',
     },
+    {
+      name: 'Buscar por cedula',
+      value: '6',
+    },
   ];
   selectedSearchMethod: string;
   isSearchPerformed: boolean;
@@ -63,6 +68,8 @@ export class ContactabilityComponent implements AfterViewInit {
   searchByEmailComponent!: SearchByEmailComponent;
   @ViewChild(SearchByPhoneComponent)
   searchByPhoneComponent!: SearchByPhoneComponent;
+  @ViewChild(SearchByIdentificationComponent)
+  searchByIdentificationComponent!: SearchByIdentificationComponent;
 
   constructor(private contactabilityService: ContactabilityService) {
     this.dataSource = new MatTableDataSource<Contactability>([]);
@@ -99,6 +106,9 @@ export class ContactabilityComponent implements AfterViewInit {
         break;
       case '5':
         this.searchByPhoneComponent.searchContactabilityByPhone(this.dataSource);
+        break;
+      case '6':
+        this.searchByIdentificationComponent.searchContactabilityByIdentification(this.dataSource);
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;

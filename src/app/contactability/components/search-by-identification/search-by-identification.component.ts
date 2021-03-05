@@ -16,7 +16,7 @@ export class SearchByIdentificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchProductByIdentification(dataSource: MatTableDataSource<Contactability>) {
+  searchContactabilityByIdentification(dataSource: MatTableDataSource<Contactability>) {
     this.contactabilityService.getByIdentification(this.identification).subscribe((data) => {
       dataSource.data = data;
     });
