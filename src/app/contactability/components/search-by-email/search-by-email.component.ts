@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ContactabilityService } from '../../services/contactability.service';
 
@@ -9,32 +10,17 @@ import { ContactabilityService } from '../../services/contactability.service';
   styleUrls: ['./search-by-email.component.css']
 })
 export class SearchByEmailComponent implements OnInit {
-  contactability?: Contactability[];
-  displayedColumns = [
-    'campaign',
-    'identification',
-    'names',
-    'surnames',
-    'phone',
-    'status',
-  ];
   public email: string = '';
-  floatLabelControl = new FormControl('auto');
-  clicked = false;
 
   constructor(private contactabilityService: ContactabilityService) {}
 
   ngOnInit(): void {
   }
 
-  searchCantactabilityByEmail() {
+  searchCantactabilityByEmail(dataSource: MatTableDataSource<Contactability>) {
     this.contactabilityService.getByEmail(this.email).subscribe((data) => {
-      this.contactability = data;
+      dataSource.data = data;
     });
-  }
-
-  setNewSearch(){
-    this.contactability = undefined;
   }
 
 }
