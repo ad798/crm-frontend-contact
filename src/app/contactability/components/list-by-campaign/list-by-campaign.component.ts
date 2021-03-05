@@ -14,42 +14,26 @@ import { ContactabilityService } from '../../services/contactability.service';
 })
 export class ListByCampaignComponent implements OnInit {
 
-  displayedColumns = [
-    'campaign.name',
-    'clientIdentification',
-    'clientName',
-    'clientSurname',
-    'clientPhone',
-    'status',
-  ];
-  contactability?: Contactability;
-  dataSource: MatTableDataSource<Contactability>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   campaignId: number = 0;
-  clientId: string = '';
-  clicked = false;
   campaignsList: Campaign[] = [];
 
   constructor(
     private contactabilityService: ContactabilityService,
     private campaignService: CampaignService
-    ) {
-      this.dataSource = new MatTableDataSource<Contactability>([]);
-    }
+    ) {}
 
   ngOnInit(): void {
     this.listCampaigns();
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  searchContactabilityByCampaign() {
+  searchContactabilityByCampaign(dataSource: MatTableDataSource<Contactability>) {
     this.contactabilityService.getByCampaign(this.campaignId).subscribe((data) => {
-      this.dataSource.data = data;
+      dataSource.data = data;
+    },
+    (error) => {
+      dataSource.data = [];
     });
   }
 
@@ -57,10 +41,6 @@ export class ListByCampaignComponent implements OnInit {
     this.campaignService.getCampaigns().subscribe((data) => {
       this.campaignsList = data
     })
-  }
-
-  setNewSearch() {
-    this.dataSource.data = [];
   }
 
 }
