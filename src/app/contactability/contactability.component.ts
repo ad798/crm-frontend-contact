@@ -1,6 +1,7 @@
 import { ViewChild } from '@angular/core';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ListByCampaignComponent } from './components/list-by-campaign/list-by-campaign.component';
@@ -52,11 +53,11 @@ export class ContactabilityComponent implements AfterViewInit {
       value: '5',
     },
     {
-      name: 'Buscar por cedula',
+      name: 'Buscar por CI/RUC',
       value: '6',
     },
     {
-      name: 'Buscar por cedula y campaña',
+      name: 'Buscar por CI/RUC y campaña',
       value: '7',
     },
   ];
@@ -79,7 +80,10 @@ export class ContactabilityComponent implements AfterViewInit {
   @ViewChild(SearchByCampaignIdClientIdComponent)
   searchByCampaignIdClientIdComponent!: SearchByCampaignIdClientIdComponent;
 
-  constructor(private contactabilityService: ContactabilityService) {
+  constructor(
+    private contactabilityService: ContactabilityService,
+    private _snackBar: MatSnackBar
+  ) {
     this.dataSource = new MatTableDataSource<Contactability>([]);
     this.selectedSearchMethod = '';
     this.isSearchPerformed = false;
@@ -110,40 +114,75 @@ export class ContactabilityComponent implements AfterViewInit {
         this.currentSearch = this.searchByNameSurnameComponent.searchProductByNameAndSurname;
         break;
       case '3':
-        this.listByCampaignComponent.searchContactabilityByCampaign(this.dataSource);
+        this.listByCampaignComponent.searchContactabilityByCampaign(
+          this.dataSource
+        );
         this.currentSearch = this.listByCampaignComponent.searchContactabilityByCampaign;
         break;
       case '4':
-        this.searchByEmailComponent.searchContactabilityByEmail(this.dataSource);
+        this.searchByEmailComponent.searchContactabilityByEmail(
+          this.dataSource
+        );
         this.currentSearch = this.searchByEmailComponent.searchContactabilityByEmail;
         break;
       case '5':
-        this.searchByPhoneComponent.searchContactabilityByPhone(this.dataSource);
+        this.searchByPhoneComponent.searchContactabilityByPhone(
+          this.dataSource
+        );
         this.currentSearch = this.searchByPhoneComponent.searchContactabilityByPhone;
         break;
       case '6':
-        this.searchByIdentificationComponent.searchContactabilityByIdentification(this.dataSource);
+        this.searchByIdentificationComponent.searchContactabilityByIdentification(
+          this.dataSource
+        );
         this.currentSearch = this.searchByIdentificationComponent.searchContactabilityByIdentification;
         break;
       case '7':
-        this.searchByCampaignIdClientIdComponent.searchContactabilityByCampaignIdClientId(this.dataSource);
+        this.searchByCampaignIdClientIdComponent.searchContactabilityByCampaignIdClientId(
+          this.dataSource
+        );
         this.currentSearch = this.searchByCampaignIdClientIdComponent.searchContactabilityByCampaignIdClientId;
         break;
     }
     this.isSearchPerformed = !this.isSearchPerformed;
   }
 
-  updateStatus(id: number, status: string){
-    this.contactabilityService.updateStatus(id, status).subscribe((data) => {
-      console.log("update successful");
-    },
-    (error) => {
-      console.log("error while uodating product");
-    });
+  updateStatus(id: number, status: string) {
+    this.contactabilityService.updateStatus(id, status).subscribe(
+      (data) => {
+        this.openSnackBar('Éxito: Se ha actualizado el estado', 'Cerrar');
+        console.log('update successful');
+      },
+      (error) => {
+        this.openSnackBar(
+          'Error: No se ha podido actualizar el estado',
+          'Cerrar'
+        );
+        console.log('error while uodating product');
+      }
+    );
   }
 
   setNewSearch() {
     this.dataSource.data = [];
     this.isSearchPerformed = !this.isSearchPerformed;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  openNotFoundSnackBar() {
+    this._snackBar.open('No se han encontrado registros', 'Cerrar', {
+      duration: 5000,
+    });
+  }
+
+  openSuccessSanckBar() {
+    this._snackBar.open('Registros encontrados', 'Cerrar', {
+      duration: 5000,
+    });
   }
 }

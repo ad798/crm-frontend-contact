@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Contactability } from 'models/contactability.model';
 import { ContactabilityService } from '../../services/contactability.service';
@@ -12,9 +12,14 @@ export class SearchByNameSurnameComponent implements OnInit {
   name: string;
   surname: string;
 
+  @Output('openNotFoundSnackBar')
+  openNotFoundSnackBar: EventEmitter<any> = new EventEmitter();
+  @Output('openSuccessSanckBar')
+  openSuccessSanckBar: EventEmitter<any> = new EventEmitter();
+
   constructor(private contactabilityService: ContactabilityService) {
-    this.name = 'Alan';
-    this.surname = 'Quimbita';
+    this.name = 'NOMBRE';
+    this.surname = 'APELLIDO';
   }
 
   ngOnInit(): void {}
@@ -24,8 +29,12 @@ export class SearchByNameSurnameComponent implements OnInit {
   ): void {
     this.contactabilityService
       .getByNameAndSurname(this.name, this.surname)
-      .subscribe((data) => {
-        dataSource.data = data;
-      });
+      .subscribe(
+        (data) => {
+          dataSource.data = data;
+          this.openSuccessSanckBar.emit();
+        },
+        (error) => this.openNotFoundSnackBar.emit()
+      );
   }
 }

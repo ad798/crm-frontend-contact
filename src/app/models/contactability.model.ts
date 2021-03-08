@@ -19,7 +19,7 @@ export class Contactability {
   clientId = 'string';
   clientIdentification = 'string';
   clientName = 'string';
-  clientPhone = 'string';
+  clientPhone !: string | any;
   clientSurname = 'string';
   id = 0;
   status = 'string';
