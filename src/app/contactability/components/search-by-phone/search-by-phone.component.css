@@ -5,3 +5,15 @@ table {
 .example-container .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
+
+.mat-form-field {
+  margin: 1.5em;
+  font-size: 16px;
+  width: 95%;
+}
+
+.full-width {
+  width: 90%;
+  font-size: 16px;
+  margin: 1.5em;
+}

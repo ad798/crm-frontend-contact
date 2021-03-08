@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     FormsModule,
+    MatSnackBarModule,
   ],
   exports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     FormsModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedStyleModule {}

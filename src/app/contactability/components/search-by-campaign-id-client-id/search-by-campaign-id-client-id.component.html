@@ -1,8 +1,8 @@
 
 <mat-form-field hintLabel="Max 10 characters" appearance="fill">
   <mat-label>Ingrese la cedula del cliente</mat-label>
-  <input matInput matInput [(ngModel)]="clientId" #input maxlength="10" placeholder="Ej. 1700000000">
-  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  <input matInput matInput [(ngModel)]="clientId" #input maxlength="13" placeholder="Ej. 1700000000">
+  <mat-hint align="end">{{input.value?.length || 0}}/13</mat-hint>
 </mat-form-field>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <mat-form-field appearance="fill">

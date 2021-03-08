@@ -3,23 +3,23 @@ table {
 }
 
 .accepted {
-  background-color: green;
-  color: #fff;
+  background-color: green !important;
+  color: #fff !important;
 }
 
 .rejected {
-  background-color: red;
-  color: #fff;
+  background-color: red !important;
+  color: #fff!important;
 }
 
 .in-progress {
-  background-color: darkorange;
-  color: #fff;
+  background-color: darkorange !important;
+  color: #fff !important;
 }
 
 .assigned {
-  background-color: black;
-  color: #fff;
+  background-color: rgba(78, 74, 74, 0.712) !important;
+  color: #fff !important;
 }
 
 .mat-form-field {
@@ -34,6 +34,6 @@ table {
   margin: 1.5em;
 }
 
-.mat-selected {
-  color: black;
+.mat-select-custom {
+  width: 110px;
 }

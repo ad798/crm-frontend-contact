@@ -12,35 +12,84 @@
   </mat-form-field>
   <div [ngSwitch]="selectedSearchMethod">
     <div *ngSwitchCase="1">
-      <app-search-by-single-status></app-search-by-single-status>
+      <app-search-by-single-status
+        (openNotFoundSnackBar)="openNotFoundSnackBar()"
+        (openSuccessSanckBar)="openSuccessSanckBar()"
+      ></app-search-by-single-status>
     </div>
     <div *ngSwitchCase="2">
-      <app-search-by-name-surname></app-search-by-name-surname>
+      <app-search-by-name-surname
+        (openNotFoundSnackBar)="openNotFoundSnackBar()"
+        (openSuccessSanckBar)="openSuccessSanckBar()"
+      ></app-search-by-name-surname>
     </div>
     <div *ngSwitchCase="3">
-      <app-list-by-campaign></app-list-by-campaign>
+      <app-list-by-campaign
+        (openNotFoundSnackBar)="openNotFoundSnackBar()"
+        (openSuccessSanckBar)="openSuccessSanckBar()"
+      ></app-list-by-campaign>
     </div>
     <div *ngSwitchCase="4">
-      <app-search-by-email></app-search-by-email>
+      <app-search-by-email
+        (openNotFoundSnackBar)="openNotFoundSnackBar()"
+        (openSuccessSanckBar)="openSuccessSanckBar()"
+      ></app-search-by-email>
     </div>
     <div *ngSwitchCase="5">
-      <app-search-by-phone></app-search-by-phone>
+      <app-search-by-phone
+        (openNotFoundSnackBar)="openNotFoundSnackBar()"
+        (openSuccessSanckBar)="openSuccessSanckBar()"
+      ></app-search-by-phone>
     </div>
-    <div *ngSwitchCase="6">
+    <div
+      *ngSwitchCase="6"
+      (openNotFoundSnackBar)="openNotFoundSnackBar()"
+      (openSuccessSanckBar)="openSuccessSanckBar()"
+    >
       <app-search-by-identification></app-search-by-identification>
     </div>
-    <div *ngSwitchCase="7">
+    <div
+      *ngSwitchCase="7"
+      (openNotFoundSnackBar)="openNotFoundSnackBar()"
+      (openSuccessSanckBar)="openSuccessSanckBar()"
+    >
       <app-search-by-campaign-id-client-id></app-search-by-campaign-id-client-id>
     </div>
   </div>
 </div>
 
+<!--
 <br />
 <div *ngIf="isSearchPerformed && dataSource.data.length === 0">
   <mat-toolbar color="warn">
     <span>No hay resultados para mostrar...</span>
   </mat-toolbar>
 </div>
+-->
+<br />
+<mat-card-actions style="margin-left:  5em;">
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="applySearchMethod()"
+    [disabled]="selectedSearchMethod === '' "
+  >
+    Buscar
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    (click)="setNewSearch()"
+    [disabled]="dataSource.data.length <= 0"
+  >
+    Limpiar
+  </button>
+</mat-card-actions>
+
+<br />
+<mat-divider></mat-divider>
+<br />
 
 <mat-card-content class="mat-elevation-z8">
   <mat-form-field>
@@ -83,9 +132,13 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
       <td mat-cell *matCellDef="let element">
-        <mat-select [(value)]="element.status" (selectionChange)="updateStatus(element.id, $event.value)">
+        <mat-select
+          [(value)]="element.status"
+          (selectionChange)="updateStatus(element.id, $event.value)"
+          class="mat-select-custom"
+        >
           <mat-option value="ASS" class="assigned">Asignado</mat-option>
-          <mat-option value="INP" class="accepted">En progreso</mat-option>
+          <mat-option value="INP" class="in-progress">En progreso</mat-option>
           <mat-option value="ACC" class="accepted">Aceptado</mat-option>
           <mat-option value="REJ" class="rejected">Rechazado</mat-option>
         </mat-select>
@@ -103,26 +156,3 @@
   class="mat-elevation-z8"
   showFirstLastButtons
 ></mat-paginator>
-
-<br />
-<mat-divider></mat-divider>
-<br />
-<mat-card-actions>
-  <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    (click)="applySearchMethod()"
-    [disabled]="selectedSearchMethod == '' || isSearchPerformed"
-  >
-    Buscar
-  </button>
-  <button
-    mat-raised-button
-    type="button"
-    (click)="setNewSearch()"
-    [disabled]="!isSearchPerformed"
-  >
-    Limpiar
-  </button>
-</mat-card-actions>

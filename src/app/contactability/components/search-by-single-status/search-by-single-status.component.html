@@ -1,9 +1,9 @@
 <mat-form-field appearance="fill">
   <mat-label>Estados</mat-label>
   <mat-select [(value)]="selectedStatus" required>
-    <mat-option value="ASS">Asignado</mat-option>
-    <mat-option value="INP">En progreso</mat-option>
-    <mat-option value="ACC">Aceptado</mat-option>
-    <mat-option value="REJ">Rechazado</mat-option>
+    <mat-option value="ASS" class="assigned">Asignado</mat-option>
+    <mat-option value="INP" class="in-progress">En progreso</mat-option>
+    <mat-option value="ACC" class="accepted">Aceptado</mat-option>
+    <mat-option value="REJ" class="rejected">Rechazado</mat-option>
   </mat-select>
 </mat-form-field>
